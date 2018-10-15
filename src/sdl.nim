@@ -1061,7 +1061,7 @@ type                          # This is the system-independent thread info struc
 type EventSeq = set[EventKind]
 {.deprecated: [TEventSeq: EventSeq].}
 
-template evconv(procName: expr, ptrName: typedesc, assertions: EventSeq): stmt {.immediate.} =
+template evconv(procName: untyped, ptrName: typedesc, assertions: EventSeq): typed {.immediate.} =
   proc `procName`*(event: PEvent): ptrName =
     assert(contains(assertions, event.kind))
     result = cast[ptrName](event)
