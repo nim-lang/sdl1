@@ -8,7 +8,7 @@
 #
 
 {.deadCodeElim: on.}
-import unsigned
+
 when defined(windows):
   const
     LibName = "SDL.dll"
@@ -1055,13 +1055,10 @@ type                          # This is the system-independent thread info struc
   ByteArray* = array[0..32767, int8]
   PWordArray* = ptr WordArray
   WordArray* = array[0..16383, int16] # Generic procedure pointer
-{.deprecated: [TKeyStateArr: KeyStateArr, TByteArray: ByteArray, TThread: Thread,
-              TWordArray: WordArray].}
 
 type EventSeq = set[EventKind]
-{.deprecated: [TEventSeq: EventSeq].}
 
-template evconv(procName: untyped, ptrName: typedesc, assertions: EventSeq): typed {.immediate.} =
+template evconv(procName: untyped, ptrName: typedesc, assertions: EventSeq): typed =
   proc `procName`*(event: PEvent): ptrName =
     assert(contains(assertions, event.kind))
     result = cast[ptrName](event)
