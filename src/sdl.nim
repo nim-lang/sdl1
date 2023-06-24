@@ -2305,10 +2305,10 @@ proc swap32(d: int32): int32 =
       ((d shr 8) and 0x0000FF00) or (d shr 24))
 
 proc isBitOn(value: int, bit: int8): bool =
-  result = ((value and (1 shl ze(bit))) != 0)
+  result = ((value and (1 shl int(cast[uint8](bit)))) != 0)
 
 proc turnBitOn(value: int, bit: int8): int =
-  result = (value or (1 shl ze(bit)))
+  result = (value or (1 shl int(cast[uint8](bit))))
 
 proc turnBitOff(value: int, bit: int8): int =
-  result = (value and not (1 shl ze(bit)))
+  result = (value and not (1 shl int(cast[uint8](bit))))
